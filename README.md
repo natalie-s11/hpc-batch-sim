@@ -1,41 +1,81 @@
-Executive Summary
+# HPC Batch Simulation with API and Docker
 
-Problem: Need to simulate batch job orchestration for HPC concepts.
+## Executive Summary
 
-Solution: Local Python scheduler runs multiple “jobs,” logs outputs, demonstrates parallel execution.
+**Problem:**  
+Simulate multiple batch jobs in a high-performance computing (HPC) style environment, while providing a simple API to check system health.  
 
-System Overview
+**Solution:**  
+A Python-based batch job scheduler that runs multiple simulated jobs, generates CSV outputs, and exposes a Flask API health endpoint. The project is fully containerized using Docker for reproducibility.
 
-Course Concept: HPC batch job orchestration
+---
 
-Architecture Diagram: (Assets: scheduler → job pool → job scripts → outputs)
+## System Overview
 
-Data/Models/Services: random numbers, CSV outputs
+**Course Concepts:**  
+- HPC job orchestration using Python multiprocessing  
+- Flask API for health check  
+- Docker containerization  
 
-How to Run
+**Architecture Diagram:**  
+![Architecture](assets/architecture.png)
 
-Docker commands above
+**Data/Models/Services:**  
+- Job outputs: CSV files with simulated numbers, sum, and mean  
+- Flask API: `/health` endpoint returning job directory status  
+- Docker container ensures reproducible environment  
 
-Optional .env for NUM_JOBS
+---
 
-Design Decisions
+## How to Run (Local)
 
-Why Python + subprocess + multiprocessing
+**Build the Docker image:**
 
-Tradeoffs: simplicity vs. real HPC complexity
+```bash
+docker build -t hpc-batch-sim:latest .
+```
 
-Results & Evaluation
+**Run the container with 5 jobs and mount outputs folder:**
 
-Screenshot of outputs/logs in /assets/screenshots
+```bash
+docker run --rm -v $(pwd)/outputs:/app/outputs -e NUM_JOBS=5 hpc-batch-sim:latest
+```
+## How to Test the API
 
-Validation: ensure all CSVs are created
+**Check the Flask health endpoint:**
 
-What’s Next
+```bash
+curl http://localhost:8080/health
+```
 
-Simulate job dependencies, variable runtimes, logging metrics
+### Sample Output
+{"jobs_dir":true,"status":"ok"}
 
-Optional: scale to simulated cluster nodes
+### Generated Output Files
+job_1.csv  job_2.csv  job_3.csv  job_4.csv  job_5.csv
 
-Links
+### Contents of job_1.csv (first 5 lines)
+numbers,sum,mean
+"[84, 62, 95, 76, 74, 93, 33, 2, 69, 20]",608,60.8
 
-GitHub repo: https://github.com/natalie-s11/hpc-batch-sim/tree/main
+### Additional Assets
+assets/full_batch_log.txt – full batch run log
+assets/job_1_snippet.txt – snippet showing contents of one CSV file
+assets/architecture.png – architecture diagram
+ 
+### Design Decisions
+- Python multiprocessing: Simulates HPC batch jobs efficiently on a local machine
+- Flask API: Provides a minimal health check endpoint; easy to extend in future
+- Docker containerization: Ensures reproducible environment and portability
+
+### Tradeoffs:
+- Performance is limited by local machine resources
+- Single container only; not distributed across multiple nodes
+
+### What’s Next
+- Extend simulation to multiple containers to mimic a cluster
+- Add more detailed logging, metrics, and job status reporting
+- Optional deployment to cloud environments
+
+### Links
+GitHub Repo: https://github.com/natalie-s11/hpc-batch-sim
