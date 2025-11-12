@@ -18,7 +18,7 @@ This project provides a Python-based batch job scheduler that simulates multiple
 - Docker containerization: Ensures reproducible and portable execution of the application
 
 **Architecture Diagram:**  
-![Architecture](assets/architecture.png)
+<img width="202" height="308" alt="architecture" src="https://github.com/user-attachments/assets/18188c59-9a92-4cfe-aad6-0469576390ae" />
 
 **Data/Models/Services:**  
 - Job outputs: CSV files with simulated numbers, sum, and mean  
