@@ -12,7 +12,7 @@ This project provides a Python-based batch job scheduler that simulates multiple
 
 **Course Concepts:**  
 - HPC job orchestration using Python multiprocessing: Simulates multiple batch jobs efficiently on a local machine
-- Flask API: Provides a minimal health check endpoint and job configuration endpoint
+- Flask API: Provides a minimal health check endpoint and job configuration endpoint (**Need to fix this!**)
 - Docker containerization: Ensures reproducible and portable execution of the application
 
 **Architecture Diagram:**  
