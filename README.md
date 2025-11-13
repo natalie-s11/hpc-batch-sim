@@ -6,8 +6,7 @@
 High-performance computing (HPC) environments often require running multiple batch jobs efficiently, but users need a simple way to monitor system health and job progress without complex infrastructure. This project addresses that gap for developers, students, or researchers who want to simulate HPC-style batch processing on a local machine.
 
 **Solution:**  
-This project provides a Python-based batch job scheduler that simulates multiple jobs, generates CSV outputs with basic statistics, and exposes a minimal Flask API for checking system health. The environment is containerized with Docker, allowing anyone to run the simulation reproducibly with a single command, without needing access to an actual HPC cluster.
-
+This project provides a Python-based batch job scheduler that simulates multiple jobs, generates CSV outputs with basic statistics, and exposes a minimal Flask API for checking system health and job configuration (**Need to fix this**). The entire environment is containerized with Docker, allowing anyone to run the simulation reproducibly with a single command, without needing access to an actual HPC cluster.
 ## System Overview
 
 **Course Concepts:**  
@@ -24,6 +23,21 @@ This project provides a Python-based batch job scheduler that simulates multiple
 - Docker container ensures reproducible environment  
 
 ---
+## One-Commmand Launch
+You can run the HPC batch simulation and start the API in a single command:
+```bash
+docker run --rm -p 8080:8080 \
+    -v $(pwd)/outputs:/app/outputs \
+    -e NUM_JOBS=5 \
+    -e API_PORT=8080 \
+    hpc-batch-sim:latest
+```
+
+What this does:
+- Runs the batch simulation with NUM_JOBS=5 jobs
+- Saves output CSVs to your local outputs/ folder
+- Starts the Flask API accessible at http://localhost:8080
+- Automatically cleans up the container when you stop it (--rm)
 
 ## How to Run (Local)
 
@@ -36,8 +50,10 @@ docker build -t hpc-batch-sim:latest .
 **Run the container with 5 jobs and mount outputs folder:**
 
 ```bash
-docker run --rm -v $(pwd)/outputs:/app/outputs -e NUM_JOBS=5 -e API_PORT=8080 hpc-batch-sim:latest
+docker run --rm -p 8080:8080 -v $(pwd)/outputs:/app/outputs -e NUM_JOBS=5 -e API_PORT=8080 hpc-batch-sim:latest
 ```
+This command runs the batch simulation and starts the Flask API.
+
 ## How to Test the API
 
 ### Environment Variables
@@ -50,20 +66,22 @@ API_PORT=8080
 ### Smoke Test
 Run a minimal test to verify that the Docker container and API are running correctly:
 ```bash
-python smoke_test.py
+python tests/smoke_test.py
 ```
 
 This script will:
-- Generate a temporary Docker container running your batch simulation.
-- Check that the Flask API /health endpoint is reachable.
-- Confirm that the API reports the correct job configuration.
+- Generate a temporary Docker container running your batch simulation
+- Check that the Flask API /health endpoint is reachable
+- Confirm that the API reports the correct job configuration. (** Need to fix**)
 
 Note:
 - The smoke test does not require any additional input; it uses default environment variables defined in .env.example.
 - It is designed to run on a clean system to ensure reproducibility.
 - If port 8080 is in use, stop the conflicting container:
-  docker ps
-  docker stop <CONTAINER_ID>
+```bash
+docker ps
+docker stop <CONTAINER_ID>
+```
 
 Sample Output:
 ✅ Smoke test passed: API running and health OK.
@@ -83,6 +101,7 @@ curl http://localhost:8080/health
 ```bash
 curl http://localhost:8080/jobs/count
 ```
+** Need to fix this**
 
 ### Sample Output
 ```json
@@ -99,8 +118,6 @@ job_1.csv  job_2.csv  job_3.csv  job_4.csv  job_5.csv
 numbers,sum,mean
 "[84, 62, 95, 76, 74, 93, 33, 2, 69, 20]",608,60.8
 ```
-
-
 
 ### Additional Assets
 assets/full_batch_log.txt – full batch run log
