@@ -48,12 +48,6 @@ What this does:
 - Starts the Flask API accessible at http://localhost:8080
 - Automatically cleans up the container when you stop it (--rm)
 
-**Run the container with 5 jobs and mount outputs folder:**
-
-```bash
-docker run --rm -p 8080:8080 -v $(pwd)/outputs:/app/outputs -e NUM_JOBS=5 -e API_PORT=8080 hpc-batch-sim:latest
-```
-This command runs the batch simulation and starts the Flask API.
 
 ## How to Test the API
 
