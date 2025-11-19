@@ -38,6 +38,7 @@ docker build -t hpc-batch-sim:latest .
 ```
 
 **One-Commmand Launch**
+
 You can run the HPC batch simulation and start the API in a single command:
 ```bash
 docker run --rm -p 8080:8080 \
