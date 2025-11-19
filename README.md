@@ -7,6 +7,8 @@ High-performance computing (HPC) environments often involve running many batch j
 
 Similarly, developers or researchers working on small projects often need a way to test batch-style workflows locally without the overhead of learning complex cluster management tools or setting up full job schedulers. Traditional HPC monitoring tools can be overwhelming or inaccessible for beginners, leaving users without a clear way to observe how their jobs behave or how the system responds under load.
 
+These challenges make it hard for learners and researchers to experiment safely, understand HPC workflows, or test ideas efficiently, creating a clear need for a simpler, accessible solution.
+
 **Solution:**  
 This project provides a simple way to mimic how high-performance computing systems run many jobs at once, but without needing access to a real HPC cluster. It offers a lightweight tool that lets users simulate batches of tasks, view basic summaries of how those tasks performed, and check the system’s status through a small web interface. Everything runs inside a Docker container, so the whole setup can be launched with a single command, making it easy for students, developers, or researchers to experiment with HPC-style workflows on any computer.
 
