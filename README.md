@@ -113,7 +113,7 @@ curl http://localhost:8080/jobs/count
 job_1.csv  job_2.csv  job_3.csv  job_4.csv  job_5.csv
 ```
 
-### Contents of job_1.csv (first 5 lines)
+### Contents of job_1.csv
 ```bash
 numbers,sum,mean
 "[53, 74, 77, 56, 93, 25, 25, 19, 21, 2]",445,44.5
@@ -127,13 +127,24 @@ numbers,sum,mean
 - all images that end in .png show what the file name states
  
 ### Design Decisions
+We wanted a simple way to simulate HPC batch jobs locally without needing a real cluster. Alternatives like Slurm or PBS were too complex and not portable for students or small projects. Python multiprocessing, Flask, and Docker make it easy to run and explore.
 - Python multiprocessing: Simulates HPC batch jobs efficiently on a local machine
 - Flask API: Provides a minimal health check endpoint; easy to extend in future
 - Docker containerization: Ensures reproducible environment and portability
 
-### Tradeoffs:
-- Performance is limited by local machine resources
-- Single container only; not distributed across multiple nodes
+### Tradeoffs
+- Performance is limited to one machine; not a real cluster
+- Cost & Complexity: Minimal and easy to maintain
+- Modular code and containerized setup make updates easy
+
+### Security/Privacy
+- No secrets or PII; input is trusted and generated locally
+- Output is safe CSV data
+
+### Ops
+- Logs printed to console; API shows job counts and system health
+- Scaling is local; multiple containers could mimic clusters
+- Limitations: no real resource management or distributed scheduling
 
 ### What’s Next
 - Extend simulation to multiple containers to mimic a cluster
