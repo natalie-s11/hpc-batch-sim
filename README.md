@@ -17,6 +17,7 @@ This project provides a simple way to mimic how high-performance computing syste
 **Course Concepts:**  
 - HPC job orchestration using Python multiprocessing: Simulates multiple batch jobs efficiently on a local machine
 - Flask API: Provides a minimal health check endpoint and job configuration endpoint
+- Web frontend/dashboard: Displays system health, job CSV contents, per-job results, and mean value graphs
 - Docker containerization: Ensures reproducible and portable execution of the application
 
 **Architecture Diagram:**  
@@ -25,6 +26,7 @@ This project provides a simple way to mimic how high-performance computing syste
 **Data/Models/Services:**  
 - Job outputs: CSV files with simulated numbers, sum, and mean  
 - Flask API: `/health` endpoint returning job directory status and `/jobs/count` for configuration
+- Web Dashboard: Shows system health, number of jobs, individual CSV contents, and a graph of mean values across jobs  
 - Docker container ensures reproducible environment  
 
 ---
@@ -40,6 +42,7 @@ docker build -t hpc-batch-sim:latest .
 **One-Commmand Launch:**
 
 You can run the HPC batch simulation and start the API in a single command:
+
 ```bash
 docker run --rm -p 8080:8080 \
     -v $(pwd)/outputs:/app/outputs \
@@ -86,6 +89,8 @@ docker stop <CONTAINER_ID>
 
 Sample Output:
 ✅ Smoke test passed: API running and health OK.
+
+After running the container, open http://localhost:8080 to view the dashboard, inspect job CSVs, and see summary statistics and graphs.
 
 
 ### Check the Flask health endpoint:
