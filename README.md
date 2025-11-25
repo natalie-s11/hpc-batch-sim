@@ -1,6 +1,6 @@
 # HPC Batch Simulation with API and Docker
 
-## Executive Summary
+## Executive Summary 
 
 **Problem:**  
 High-performance computing (HPC) environments often involve running many batch jobs in parallel, but monitoring those jobs and the overall system health can be challenging without specialized tools. In academic settings, this challenge becomes even more pronounced. Students who are new to HPC concepts frequently struggle to understand how batch queues, resource allocation, and job scheduling work, especially when they do not have access to a full HPC cluster. They may rely on shared university systems with limited availability, steep learning curves, or strict usage policies that make experimentation difficult.
