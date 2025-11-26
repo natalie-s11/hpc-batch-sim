@@ -159,13 +159,9 @@ We wanted a simple way to simulate HPC batch jobs locally without needing a real
 ### What’s Next
 - Extend simulation to multiple containers to mimic a cluster
 - Add more detailed logging, metrics, and job status reporting
-- Optional deployment to cloud environments
 
 ### License
-
-This project is licensed under the MIT license.  
-Click MIT license or view the LICENSE file for additional details.
-
+This project is licensed under the MIT license. Click MIT license or view the LICENSE file for additional details.
 
 ### Links
 GitHub Repo: https://github.com/natalie-s11/hpc-batch-sim
